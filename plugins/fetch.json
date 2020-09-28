@@ -1,0 +1,26 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-cs108plugin": {
+    "source": {
+      "type": "local",
+      "path": "/Users/itshazlan/Downloads/myApp/node_modules/cordova-plugin-cs108plugin"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-ble-central": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ble-central@^1.2.5"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

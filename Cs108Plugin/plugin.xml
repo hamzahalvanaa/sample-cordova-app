@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-cs108" version="0.0.1"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Cs108Plugin</name>
+
+    <js-module name="Cs108Plugin" src="www/Cs108Plugin.js">
+        <clobbers target="window.plugins.Cs108Plugin" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="Cs108Plugin">
+                <param name="android-package" value="id.nocola.cordova.plugin.cs108.Cs108Plugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="id.nocola.cordova.plugin.cs108.CustomIME" android:label="@string/app_ime" android:permission="android.permission.BIND_INPUT_METHOD">
+                <intent-filter>
+                    <action android:name="android.view.InputMethod" />
+                </intent-filter>
+                <meta-data android:name="android.view.im" android:resource="@xml/method" />
+            </service>
+        </config-file>
+
+        <config-file target="res/values/strings.xml" parent="/*">
+            <string name="app_ime">Assets Keyboard</string>
+            <string name="subtype_en_US">English (US)</string>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-feature android:name="android.hardware.bluetooth_le" />
+            <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+
+            <uses-permission android:name="android.permission.USB_PERMISSION" />
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+        <source-file src="src/android/assets/beep3s1khz.wav" target-dir="assets" />
+        <source-file src="src/android/assets/beep3s1khzz.mp3" target-dir="assets" />
+        <source-file src="src/android/assets/beephigh.mp3" target-dir="assets" />
+        <source-file src="src/android/assets/beeplow.mp3" target-dir="assets" />
+
+        <source-file src="src/android/java/adapters/ReaderListAdapter.java" target-dir="src/id/nocola/cordova/plugin/cs108/adapters" />
+        <source-file src="src/android/java/tasks/DeviceConnectTask.java" target-dir="src/id/nocola/cordova/plugin/cs108/tasks" />
+        <source-file src="src/android/java/tasks/DeviceScanTask.java" target-dir="src/id/nocola/cordova/plugin/cs108/tasks" />
+        <source-file src="src/android/java/tasks/SaveList2ExternalTask.java" target-dir="src/id/nocola/cordova/plugin/cs108/tasks" />
+        <source-file src="src/android/java/tasks/TaskListenerItf.java" target-dir="src/id/nocola/cordova/plugin/cs108/tasks" />
+        <source-file src="src/android/java/BleConnector.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/Cs108Connector.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/Cs108Library4A.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/Cs108Plugin.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/CustomIME.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/CustomMediaPlayer.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/InventoryRfidTask.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/ReaderDevice.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/SensorConnector.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+        <source-file src="src/android/java/SharedObjects.java" target-dir="src/id/nocola/cordova/plugin/cs108" />
+
+        <source-file src="src/android/res/layout/popup.xml" target-dir="res/layout" />
+        <source-file src="src/android/res/layout/readers_list_item.xml" target-dir="res/layout" />
+        <source-file src="src/android/res/values/dimens.xml" target-dir="res/values" />
+        <source-file src="src/android/res/values/styles.xml" target-dir="res/values" />
+        <source-file src="src/android/res/xml/method.xml" target-dir="res/xml" />
+    </platform>
+</plugin>
