@@ -90,9 +90,9 @@ public class Cs108Plugin extends CordovaPlugin implements TaskListenerItf {
     }
 
     private void findCs108Devices(CallbackContext context, TaskListenerItf taskListenerItf) {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        //        cordova.getActivity().runOnUiThread(new Runnable() {
+////            @Override
+////            public void run() {
                 discoverCallback = context;
                 boolean operating = false;
                 if (mCs108Library4a.isBleConnected()) operating = true;
@@ -103,20 +103,26 @@ public class Cs108Plugin extends CordovaPlugin implements TaskListenerItf {
                     if (!deviceConnectTask.isCancelled()) operating = true;
                 }
                 if (!operating) {
-                    deviceScanTask = new DeviceScanTask(cordova.getActivity(), taskListenerItf);
+                    deviceScanTask = new DeviceScanTask(context);
                     deviceScanTask.execute();
                     mCs108Library4a.appendToLog("Started DeviceScanTask");
-                    PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
-                    result.setKeepCallback(true);
+
+                    String json = new Gson().toJson(readersList);
+                    PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+                    Log.i("Test", "Sampai disini");
                     discoverCallback.sendPluginResult(result);
                 } else {
-                    discoverCallback.error("operating true");
-                    PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, "here comes the callback");
-                    discoverCallback.sendPluginResult(pluginResult);
+//                    discoverCallback.error("operating true");
+//                    PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, "here comes the callback");
+//                    discoverCallback.sendPluginResult(pluginResult);
+                    String json = new Gson().toJson(readersList);
+                    PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+                    Log.i("Test", "Sampai disini");
+                    discoverCallback.sendPluginResult(result);
                 }
 //                    mHandler.postDelayed(checkRunnable, 5000);
-            }
-        });
+//            }
+//        });
     }
 
     public void connect(final JSONArray args, CallbackContext callbackContext, String macAddress) {
